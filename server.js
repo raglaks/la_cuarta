@@ -34,11 +34,9 @@ function isThisRT(tuit){
 }
 
 T.get('search/tweets', { q: 'amlo since:2018-01-12', count: 100 }, function(err, data, response) {
-	data.statuses.map( status => {
-		if(!isThisRT(status.text))
-			console.log(status.text)
-	})
-	res.send(data)
+	const tuits = data.statuses.filter( status => (!isThisRT(status.text)) );
+	console.log(tuits)
+	res.send(tuits)
 })
 
 
