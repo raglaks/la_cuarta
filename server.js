@@ -17,10 +17,10 @@ var Twit = require('twit')
 
 var T = new Twit({
 
-	consumer_key : process.env.CONSUMER_KEY 
-	, consumer_secret : process.env.CONSUMER_SECRET 
-	, access_token: process.env.ACCESS_TOKEN
-	, access_token_secret: process.env.ACCESS_TOKEN_SECRET
+	consumer_key : process.env.CONSUMER_KEY //ctHInIMBhU4ydVaNc3xmtmrG9
+	, consumer_secret : process.env.CONSUMER_SECRET //muDQX4eGKfm6xXjxzhjE0QaIdc3CEMyjTzY6iHNvQlBUU9M5BD
+	, access_token: process.env.ACCESS_TOKEN //88828925-bS0OU3KsMoj2DsR1QAXGkpRF6s9FvHTuUo1tNSfKS
+	, access_token_secret: process.env.ACCESS_TOKEN_SECRET //sB03ysQRwbXKYAf0HEAFwbtmGUwD9pUSCxm1f7ykNoJxo
 
 })
 
@@ -47,4 +47,5 @@ T.get('search/tweets', { q: 'amlo since:2018-01-12', count: 100 }, function(err,
 app.get('/*', function (req, res) {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
-app.listen(port);
+
+app.listen(port, () => console.log(`app is listening on ${port}`));
