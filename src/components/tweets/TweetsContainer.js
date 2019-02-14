@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Tweet from './Tweet'
 import axios from 'axios';
 
 class TweetsContainer extends Component {
@@ -17,10 +18,10 @@ class TweetsContainer extends Component {
 
 	render () {
 		return (
-      <ul>
-        { this.state.tweets.map(tweet => <li>{tweet.text}</li>)}
-      </ul>
-			)
+			<div>
+        	{ this.state.tweets.map(tweet => <Tweet tuit={tweet} />) }
+        	</div>
+		)
 	}
 }
 
