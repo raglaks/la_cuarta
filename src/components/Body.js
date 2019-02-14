@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Container } from 'semantic-ui-react';
 import Head from './Head';
+import TweetsContainer from './tweets/TweetsContainer'
 
 class Body extends Component {
 
@@ -19,6 +20,7 @@ class Body extends Component {
             <Container textAlign='center'>
 
                 <Head />
+                <TweetsContainer />
 
             </Container>
 
