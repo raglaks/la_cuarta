@@ -31,18 +31,37 @@ function isThisRT(tuit){
 app.use(express.static(__dirname));
 app.use(express.static(path.join(__dirname, 'build')));
 
+//ping pong func to test
 app.get('/ping', function (req, res) {
  return res.send('pong');
 });
 
+//get route to get all tweets with amlo query
 app.get('/get', (req, res) => {
 
-	let tuits = [];
+	let tuix = [];
 
-	T.get('search/tweets', { q: 'amlo since:2018-01-12', count: 100 }, function(err, data, response) {
-		tuits = data.statuses.filter( status => (!isThisRT(status.text)) );
-		res.send(tuits);
-		console.log(tuits);
+	T.get('search/tweets', { q: 'amlo since:2018-01-12', count: 100, tweet_mode: 'extended', truncated: false }, function(err, data, response) {
+
+		// tuits = data.statuses.filter( status => (!isThisRT(status.text)) );
+		// res.send(tuits);
+
+		data.statuses.forEach(element => {
+
+			// console.log(element.full_text);
+
+			if (!isThisRT(element.full_text)) {
+
+				tuix.push(element.full_text);
+
+			}
+
+			console.log(tuix);
+			
+		});
+
+		res.send(tuix);
+		
 	});
 
 });

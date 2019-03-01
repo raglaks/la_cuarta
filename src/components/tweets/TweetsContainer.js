@@ -12,7 +12,7 @@ class TweetsContainer extends Component {
 
 		console.log("MOUNTED");
 
-		axios.get('/ping')
+		axios.get('/get')
 		.then( res => {
 
 			console.log(res);
