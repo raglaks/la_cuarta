@@ -16,8 +16,8 @@ class TweetsContainer extends Component {
 		.then( res => {
 
 			console.log(res);
-			// const tweets = res.data;
-			// this.setState({tweets : tweets});
+			const tweets = res.data;
+			this.setState({tweets : tweets});
 
 		});
 
