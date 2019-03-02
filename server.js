@@ -41,10 +41,7 @@ app.get('/get', (req, res) => {
 
 	let tuix = [];
 
-	T.get('search/tweets', { q: 'amlo since:2018-01-12', count: 100, tweet_mode: 'extended', truncated: false }, function(err, data, response) {
-
-		// tuits = data.statuses.filter( status => (!isThisRT(status.text)) );
-		// res.send(tuits);
+	T.get('search/tweets', { q: ['amlo since:2018-01-01', 'la cuarta transformación since:2018-01-01', 'morena since:2018-01-01'], count: 100, tweet_mode: 'extended', truncated: false }, function(err, data, response) {
 
 		data.statuses.forEach(element => {
 
