@@ -41,19 +41,15 @@ app.get('/get', (req, res) => {
 
 	let tuix = [];
 
-	T.get('search/tweets', { q: ['amlo since:2018-01-01', 'la cuarta transformación since:2018-01-01', 'morena since:2018-01-01'], count: 100, tweet_mode: 'extended', truncated: false }, function(err, data, response) {
+	T.get('search/tweets', { q: 'amlo since:2018-01-01' || 'la cuarta transformación since:2018-01-01' || 'morena since:2018-01-01' || '4T since:2018-01-01' || 'andres manuel lopez obrador since:2018-01-01' || 'andres manuel since:2018-01-01' || 'lopez obrador since:2018-01-01', count: 100000, tweet_mode: 'extended' }, function(err, data, response) {
 
 		data.statuses.forEach(element => {
 
-			// console.log(element.full_text);
-
 			if (!isThisRT(element.full_text)) {
 
-				tuix.push(element.full_text);
+				tuix.push(element);
 
 			}
-
-			console.log(tuix);
 			
 		});
 

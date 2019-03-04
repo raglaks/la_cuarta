@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 
 class Tweet extends Component {
 	render(){
-		// const url = `http://twitter.com/${this.props.tuit.user.screen_name}/status/${this.props.tuit.id_str}`;
+		
+		const url = `http://twitter.com/${this.props.tuit.user.screen_name}/status/${this.props.tuit.id_str}`;
 
-		//const rant = this.props.tuit;
 		return(
 			<p>
-				{this.props.tuit}
+				<a href={url} target="_blank">{this.props.tuit.full_text}</a>
 			</p>
 			)
 	}

@@ -16,7 +16,7 @@ class TweetsContainer extends Component {
 		.then( res => {
 
 			console.log(res);
-			const tweets = res.data;
+			let tweets = res.data;
 			this.setState({tweets : tweets});
 
 		});
@@ -26,7 +26,7 @@ class TweetsContainer extends Component {
 	render () {
 		return (
 			<div>
-        	{ this.state.tweets.map(tweet => <Tweet tuit={tweet} />) }
+        		{ this.state.tweets.map(tweet => <Tweet tuit={tweet} />) }
         	</div>
 		)
 	}
