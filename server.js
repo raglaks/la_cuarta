@@ -47,11 +47,9 @@ app.get('/get', (req, res) => {
 
 	let clean = [];
 
-	let searches = queries.map(element => {
+	queries.map(element => {
 
 		T.get('search/tweets', { q: element, count: 100, tweet_mode: 'extended' }, function(err, data, response) {
-
-			//let clean = [];
 
 			data.statuses.map(element => {
 	
@@ -82,8 +80,6 @@ app.get('/get', (req, res) => {
 		res.send(t);
 
 	}
-
-	// 'amlo since:2017-01-01' || 'la cuarta transformación since:2017-01-01' || 'morena since:2017-01-01' || '4T since:2017-01-01' || 'andres manuel lopez obrador since:2017-01-01' || 'andres manuel since:2017-01-01' || 'lopez obrador since:2017-01-01'
 
 });
 
