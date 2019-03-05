@@ -9,17 +9,24 @@ class TweetsContainer extends Component {
 	};
 
 	componentWillMount = () => {
+
+		console.log("MOUNTED");
+
 		axios.get('/get')
 		.then( res => {
-			const tweets = res.data;
-			this.setState({tweets : tweets})
-		})
+
+			console.log(res);
+			let tweets = res.data;
+			this.setState({tweets : tweets});
+
+		});
+
 	}
 
 	render () {
 		return (
 			<div>
-        	{ this.state.tweets.map(tweet => <Tweet tuit={tweet} />) }
+        		{ this.state.tweets.map(tweet => <Tweet tuit={tweet} />) }
         	</div>
 		)
 	}
