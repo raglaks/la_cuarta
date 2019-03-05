@@ -39,23 +39,51 @@ app.get('/ping', function (req, res) {
 //get route to get all tweets with amlo query
 app.get('/get', (req, res) => {
 
-	let tuix = [];
+	let count = 0;
 
-	T.get('search/tweets', { q: 'amlo since:2018-01-01' || 'la cuarta transformación since:2018-01-01' || 'morena since:2018-01-01' || '4T since:2018-01-01' || 'andres manuel lopez obrador since:2018-01-01' || 'andres manuel since:2018-01-01' || 'lopez obrador since:2018-01-01', count: 100000, tweet_mode: 'extended' }, function(err, data, response) {
+	let queries = ['amlo since:2017-01-01', 'la cuarta transformación since:2017-01-01', 'morena since:2017-01-01', '4T since:2017-01-01', 'andres manuel lopez obrador since:2017-01-01', 'andres manuel since:2017-01-01', 'lopez obrador since:2017-01-01'];
 
-		data.statuses.forEach(element => {
+	//let queries = ['doggies since:2017-01-01', 'meow since:2017-01-01'];
 
-			if (!isThisRT(element.full_text)) {
+	let clean = [];
 
-				tuix.push(element);
+	let searches = queries.map(element => {
+
+		T.get('search/tweets', { q: element, count: 100, tweet_mode: 'extended' }, function(err, data, response) {
+
+			//let clean = [];
+
+			data.statuses.map(element => {
+	
+				if (!isThisRT(element.full_text)) {
+	
+					clean.push(element);
+	
+				}
+				
+			});
+
+			count++;
+
+			console.log(`cleany ${count}`, clean);
+
+			if (count === 7) {
+
+				sendInf(clean);
 
 			}
-			
+
 		});
 
-		res.send(tuix);
-		
 	});
+
+	function sendInf(t) {
+
+		res.send(t);
+
+	}
+
+	// 'amlo since:2017-01-01' || 'la cuarta transformación since:2017-01-01' || 'morena since:2017-01-01' || '4T since:2017-01-01' || 'andres manuel lopez obrador since:2017-01-01' || 'andres manuel since:2017-01-01' || 'lopez obrador since:2017-01-01'
 
 });
 
