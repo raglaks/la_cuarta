@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "axios": "^0.18.0",
+    "dotenv": "^6.2.0",
     "react": "^16.8.1",
     "react-dom": "^16.8.1",
     "react-scripts": "2.1.5",
@@ -27,5 +28,4 @@
     "not op_mini all"
   ],
   "proxy": "http://localhost:8080/"
-
 }

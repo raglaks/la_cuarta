@@ -4,13 +4,15 @@ const path = require('path');
 const port = process.env.PORT || 8080;
 const app = express();
 const Twit = require('twit');
+const dotenv = require('dotenv');
+dotenv.config({path: '/Users/raglaks/Desktop/PROJECTS/la_cuarta/.env.juicy'});
 
 const T = new Twit({
 
-	consumer_key: 'ctHInIMBhU4ydVaNc3xmtmrG9',
-	consumer_secret: 'muDQX4eGKfm6xXjxzhjE0QaIdc3CEMyjTzY6iHNvQlBUU9M5BD',
-	access_token: '88828925-bS0OU3KsMoj2DsR1QAXGkpRF6s9FvHTuUo1tNSfKS',
-	access_token_secret: 'sB03ysQRwbXKYAf0HEAFwbtmGUwD9pUSCxm1f7ykNoJxo'
+	consumer_key: process.env.CONSUMER_KEY,
+	consumer_secret: process.env.CONSUMER_SECRET,
+	access_token: process.env.ACCESS_TOKEN,
+	access_token_secret: process.env.ACCESS_TOKEN_SECRET,
 
 });
 
@@ -39,23 +41,47 @@ app.get('/ping', function (req, res) {
 //get route to get all tweets with amlo query
 app.get('/get', (req, res) => {
 
-	let tuix = [];
+	let count = 0;
 
-	T.get('search/tweets', { q: 'amlo since:2018-01-01' || 'la cuarta transformación since:2018-01-01' || 'morena since:2018-01-01' || '4T since:2018-01-01' || 'andres manuel lopez obrador since:2018-01-01' || 'andres manuel since:2018-01-01' || 'lopez obrador since:2018-01-01', count: 100000, tweet_mode: 'extended' }, function(err, data, response) {
+	let queries = ['amlo since:2017-01-01', 'la cuarta transformación since:2017-01-01', 'morena since:2017-01-01', '4T since:2017-01-01', 'andres manuel lopez obrador since:2017-01-01', 'andres manuel since:2017-01-01', 'lopez obrador since:2017-01-01'];
 
-		data.statuses.forEach(element => {
+	//let queries = ['doggies since:2017-01-01', 'meow since:2017-01-01'];
 
-			if (!isThisRT(element.full_text)) {
+	let clean = [];
 
-				tuix.push(element);
+	queries.map(element => {
+
+		T.get('search/tweets', { q: element, count: 100, tweet_mode: 'extended' }, function(err, data, response) {
+
+			data.statuses.map(element => {
+	
+				if (!isThisRT(element.full_text)) {
+	
+					clean.push(element);
+	
+				}
+				
+			});
+
+			count++;
+
+			console.log(`cleany ${count}`, clean);
+
+			if (count === 7) {
+
+				sendInf(clean);
 
 			}
-			
+
 		});
 
-		res.send(tuix);
-		
 	});
+
+	function sendInf(t) {
+
+		res.send(t);
+
+	}
 
 });
 
